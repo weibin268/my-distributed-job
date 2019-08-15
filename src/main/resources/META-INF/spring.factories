@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.zhuang.distributedjob.autoconfigure.RegistryCenterAutoConfiguration,\
+com.zhuang.distributedjob.autoconfigure.ElasticJobAutoConfiguration
