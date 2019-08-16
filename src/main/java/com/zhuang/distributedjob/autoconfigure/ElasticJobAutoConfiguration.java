@@ -64,7 +64,6 @@ public class ElasticJobAutoConfiguration implements BeanPostProcessor {
         return bean;
     }
 
-    @Scheduled
     private void initJob(Method method, SimpleJob simpleJob, Job jobAnnotation) {
         if (null != jobAnnotation) {
             String cron = StringUtils.defaultIfBlank(jobAnnotation.cron(), jobAnnotation.value());
