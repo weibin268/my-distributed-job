@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableConfigurationProperties({MyDistributedJobProperties.class})
-@ConditionalOnProperty(name = "my.distributed-job.enable", havingValue = "true")
+@ConditionalOnProperty(name = "my.distributed-job.enable", havingValue = "true", matchIfMissing = true)
 //@ConditionalOnExpression("'${my.distributed-job.enable}'.length() > 0")
 public class RegistryCenterAutoConfiguration {
 

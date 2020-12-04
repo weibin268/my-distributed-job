@@ -5,8 +5,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "my.distributed-job")
 public class MyDistributedJobProperties {
 
-    private boolean enable;
-    private ZooKeeper zooKeeper;
+    private boolean enable = true;
+    private ZooKeeper zooKeeper = new ZooKeeper();
 
     public boolean isEnable() {
         return enable;
@@ -24,8 +24,9 @@ public class MyDistributedJobProperties {
         this.zooKeeper = zooKeeper;
     }
 
-    public static class ZooKeeper{
-        private String serverLists;
+    public static class ZooKeeper {
+
+        private String serverLists = "127.0.0.1:2181";
         private String namespace = "distributed_job";
 
         public String getServerLists() {
@@ -44,6 +45,5 @@ public class MyDistributedJobProperties {
             this.namespace = namespace;
         }
     }
-
 
 }
