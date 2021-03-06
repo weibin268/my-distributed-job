@@ -1,4 +1,4 @@
-package com.zhuang.distributedjob.autoconfigure;
+package com.zhuang.distributedjob.processor;
 
 import com.dangdang.ddframe.job.api.simple.SimpleJob;
 import com.dangdang.ddframe.job.config.JobCoreConfiguration;
@@ -15,14 +15,11 @@ import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.MethodIntrospector;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
 
 import javax.sql.DataSource;
@@ -31,11 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-
-@Configuration
-@AutoConfigureAfter(RegistryCenterAutoConfiguration.class)
-@ConditionalOnBean(ZookeeperRegistryCenter.class)
-public class ElasticJobAutoConfiguration implements BeanPostProcessor {
+@Component
+public class ElasticJobBeanPostProcessor implements BeanPostProcessor {
 
     @Autowired
     private ZookeeperRegistryCenter zookeeperRegistryCenter;
@@ -87,7 +81,7 @@ public class ElasticJobAutoConfiguration implements BeanPostProcessor {
                 JobEventRdbConfiguration jobEventRdbConfiguration = new JobEventRdbConfiguration(dataSource);
                 SpringJobScheduler springJobScheduler = new SpringJobScheduler(simpleJob, zookeeperRegistryCenter, liteJobConfiguration, jobEventRdbConfiguration);
                 springJobScheduler.init();
-            }else{
+            } else {
                 SpringJobScheduler springJobScheduler = new SpringJobScheduler(simpleJob, zookeeperRegistryCenter, liteJobConfiguration);
                 springJobScheduler.init();
             }

@@ -12,10 +12,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Job {
 
-    @AliasFor("value")
     String value() default "";
 
-    @AliasFor("cron")
     String cron() default "";
 
     String jobName() default "";

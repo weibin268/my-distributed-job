@@ -1,4 +1,4 @@
-package com.zhuang.distributedjob.autoconfigure;
+package com.zhuang.distributedjob;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
