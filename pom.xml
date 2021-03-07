@@ -40,7 +40,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        <elastic.job.version>2.1.5</elastic.job.version>
+		<junit.version>4.12</junit.version>
+		<elastic.job.version>2.1.5</elastic.job.version>
 	</properties>
 
 	<build>
@@ -82,7 +83,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
 		<dependency>
