@@ -11,6 +11,8 @@ import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperRegistryCenter;
 import com.zhuang.distributedjob.annotation.Job;
 import com.zhuang.distributedjob.annotation.JobComponent;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,8 @@ import java.util.Set;
 @Component
 public class ElasticJobBeanPostProcessor implements BeanPostProcessor {
 
+    private static Logger logger = LoggerFactory.getLogger(ElasticJobBeanPostProcessor.class);
+
     @Autowired
     private ZookeeperRegistryCenter zookeeperRegistryCenter;
     @Autowired
@@ -50,8 +54,15 @@ public class ElasticJobBeanPostProcessor implements BeanPostProcessor {
             Enhancer enhancer = new Enhancer();
             enhancer.setSuperclass(SimpleJob.class);
             enhancer.setCallback((MethodInterceptor) (obj, tgMethod, args, methodProxy) -> {
-                if (method.getParameterTypes().length == 0) return method.invoke(bean);
-                return method.invoke(bean, args);
+                Object result;
+                logger.debug("distributed job begin invoke -> {}.{}", target.getName(), method.getName());
+                if (method.getParameterTypes().length == 0) {
+                    result = method.invoke(bean);
+                } else {
+                    result = method.invoke(bean, args);
+                }
+                logger.debug("distributed job end invoke -> {}.{}", target.getName(), method.getName());
+                return result;
             });
             initJob(method, (SimpleJob) enhancer.create(), method.getAnnotation(Job.class));
         }
