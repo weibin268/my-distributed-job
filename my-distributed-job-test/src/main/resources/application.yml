@@ -1,0 +1,10 @@
+# server
+server:
+  port: 8081
+  tomcat:
+    uri-encoding: UTF-8
+# distributed-job
+my:
+  distributed-job:
+    zoo-keeper:
+      server-lists: "192.168.0.200:2181"
