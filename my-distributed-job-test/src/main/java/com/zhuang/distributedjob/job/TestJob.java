@@ -13,7 +13,7 @@ public class TestJob {
 
     @Job(cron = "0/1 * * * * ?")//每秒执行1次
     public void test() {
-        System.out.println("test -> " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        System.out.println("test -> " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + " -> " + count++);
     }
 
 }
