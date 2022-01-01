@@ -27,7 +27,7 @@ public class MyDistributedJobProperties {
     public static class ZooKeeper {
 
         private String serverLists = "127.0.0.1:2181";
-        private String namespace = "distributed_job";
+        private String namespace = "my-distributed-job";
 
         public String getServerLists() {
             return serverLists;
